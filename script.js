@@ -1,39 +1,75 @@
-// Fireworks
-const canvas=document.getElementById('fireworks');
-const ctx=canvas.getContext('2d');
-canvas.width=innerWidth;canvas.height=innerHeight;
-function rnd(a,b){return Math.random()*(b-a)+a}
-function fire(){
- ctx.fillStyle='rgba(0,0,0,.2)';
- ctx.fillRect(0,0,canvas.width,canvas.height);
- for(let i=0;i<6;i++){
-  ctx.fillStyle=`hsl(${rnd(0,360)},100%,60%)`;
-  ctx.beginPath();
-  ctx.arc(rnd(0,canvas.width),rnd(0,canvas.height/2),3,0,7);
-  ctx.fill();
- }
- requestAnimationFrame(fire);
+/* ✍️ Typing Effect */
+const text = "🎉 Happy Birthday Radha 🎉";
+let i = 0;
+const typing = document.getElementById("typing");
+function type() {
+  if (i < text.length) {
+    typing.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 100);
+  }
 }
-fire();
+type();
 
-// Balloons
-const bal=document.querySelector('.balloons');
-for(let i=0;i<5;i++){
- let s=document.createElement('span');
- s.style.left=Math.random()*100+'vw';
- bal.appendChild(s);
+/* ❤️ Auto Heart Rain */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
+
+/* 🎁 Surprise Box */
+const box = document.getElementById("surpriseBox");
+box.onclick = () => box.style.display = "none";
+
+/* 🎆 Fireworks */
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+function fireworkBurst(x, y) {
+  for (let i = 0; i < 80; i++) {
+    ctx.beginPath();
+    ctx.arc(x, y, 2, 0, Math.PI * 2);
+    ctx.fillStyle = `hsl(${Math.random()*360},100%,60%)`;
+    ctx.fill();
+  }
 }
 
-// Surprise + heart rain
-document.getElementById('surpriseBtn').onclick=()=>{
- for(let i=0;i<80;i++){
-  let h=document.createElement('div');
-  h.className='heart';
-  h.innerHTML='💖';
-  h.style.left=Math.random()*100+'vw';
-  h.style.animationDuration=2+Math.random()*3+'s';
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),5000);
- }
- alert('🎆 Surprise for Radha 🎆');
-}
+setInterval(() => {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  fireworkBurst(
+    Math.random()*canvas.width,
+    Math.random()*canvas.height/2
+  );
+}, 900);
+
+/* 🎂 Cake Cut + Firework Burst */
+const cake = document.getElementById("cake");
+const knife = document.getElementById("knife");
+
+cake.onclick = () => {
+  knife.style.display = "block";
+
+  for (let j = 0; j < 5; j++) {
+    setTimeout(() => {
+      fireworkBurst(
+        Math.random()*canvas.width,
+        Math.random()*canvas.height/2
+      );
+    }, j * 300);
+  }
+};
+
+/* 📱 Mobile Shake */
+setInterval(() => {
+  document.body.classList.add("shake");
+  setTimeout(() => {
+    document.body.classList.remove("shake");
+  }, 400);
+}, 6000);
+
