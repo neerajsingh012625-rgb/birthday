@@ -1,49 +1,124 @@
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI}
-body{
-background:radial-gradient(circle at top,#1b0033,#000);
-overflow:hidden;
-text-align:center;
-color:white;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
-.container{
-position:relative;
-z-index:5;
-margin-top:40px;
+
+body {
+  background: radial-gradient(circle at top, #1b0033, #000);
+  overflow: hidden;
+  text-align: center;
+  color: white;
 }
-.photo{
-width:240px;
-border-radius:20px;
-box-shadow:0 0 30px pink;
-margin:20px 0;
-animation:pop 1.5s ease;
+
+/* 🎁 Surprise Box */
+#surpriseBox {
+  position: fixed;
+  font-size: 90px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+  animation: popIn 1.5s ease;
 }
-@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
-button{
-padding:14px 26px;
-font-size:18px;
-border:none;
-border-radius:30px;
-background:#ff69b4;
-cursor:pointer;
+
+@keyframes popIn {
+  from { transform: translate(-50%, -50%) scale(0); }
+  to { transform: translate(-50%, -50%) scale(1); }
 }
-.balloons span{
-position:fixed;
-bottom:-120px;
-width:60px;height:80px;
-background:#ff6f91;
-border-radius:50%;
-animation:float 10s infinite;
+
+/* 💖 Content */
+.container {
+  margin-top: 80px;
+  position: relative;
+  z-index: 5;
 }
-.balloons span:nth-child(2){left:20%;animation-delay:2s}
-.balloons span:nth-child(3){left:40%;animation-delay:4s}
-.balloons span:nth-child(4){left:60%;animation-delay:6s}
-.balloons span:nth-child(5){left:80%;animation-delay:8s}
-@keyframes float{to{transform:translateY(-120vh)}}
-.heart{
-position:fixed;
-top:-10px;
-font-size:22px;
-animation:fall 4s linear infinite;
+
+.photo {
+  width: 220px;
+  border-radius: 50%;
+  border: 5px solid pink;
+  box-shadow: 0 0 25px pink;
+  margin: 20px 0;
 }
-@keyframes fall{to{transform:translateY(110vh)}}
-canvas{position:fixed;top:0;left:0}
+
+/* 🎈 Balloons */
+.balloon {
+  width: 60px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -100px;
+  animation: float 12s infinite;
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 50px;
+  background: white;
+  top: 100%;
+  left: 50%;
+}
+
+.red { background: red; left: 10%; }
+.blue { background: deepskyblue; left: 30%; }
+.yellow { background: gold; left: 60%; }
+.pink { background: hotpink; left: 80%; }
+
+@keyframes float {
+  to { bottom: 120%; }
+}
+
+/* 💖 Hearts */
+.heart {
+  position: fixed;
+  font-size: 22px;
+  animation: fall 5s linear forwards;
+}
+
+@keyframes fall {
+  from { top: -10px; opacity: 1; }
+  to { top: 110%; opacity: 0; }
+}
+
+/* 🎂 Cake */
+#cake {
+  font-size: 120px;
+  position: relative;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#knife {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 60px;
+  display: none;
+}
+
+/* 📱 Shake */
+.shake {
+  animation: shake 0.4s infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(0); }
+  25% { transform: translate(3px, -3px); }
+  50% { transform: translate(-3px, 3px); }
+  75% { transform: translate(3px, 3px); }
+  100% { transform: translate(0); }
+}
+
+/* 🎆 Fireworks */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
